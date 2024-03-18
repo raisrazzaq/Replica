@@ -5,14 +5,14 @@ import {
   Dimensions,
   Image,
   TouchableOpacity,
-  ScrollView
+  ScrollView,
 } from 'react-native';
 import React from 'react';
 import {SofaDetails} from '../../utlis/constants';
 const Card = () => {
   return (
-      <View>
-         <ScrollView>
+    <>
+      <ScrollView>
         {SofaDetails.map((item, index) => (
           <View style={styles.Container} key={index}>
             <View style={styles.cardWrapper}>
@@ -37,8 +37,8 @@ const Card = () => {
             </View>
           </View>
         ))}
-        </ScrollView>
-      </View>
+      </ScrollView>
+    </>
   );
 };
 

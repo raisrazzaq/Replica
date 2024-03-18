@@ -21,8 +21,8 @@ const BottomTab = () => {
       animatedX.value = withTiming(0, {durration: 500});
 
       setTimeout(() => {
-        animatedBtn1Y.value = withTiming(-200, {duration: 500});
-        animatedY.value = withTiming(-200, {duration: 500});
+        animatedBtn1Y.value = withTiming(-100, {duration: 500});
+        animatedY.value = withTiming(-100, {duration: 500});
         setTimeout(() => {
           animatedY.value = withTiming(0, {duration: 500});
           animatedBtn1Y.value = withTiming(0, {duration: 500});
@@ -32,7 +32,7 @@ const BottomTab = () => {
       animatedY.value = withTiming(0, {duration: 500});
       animatedX.value = withTiming(100, {durration: 500});
       setTimeout(() => {
-        animatedBtn2Y.value = withTiming(-200, {duration: 500});
+        animatedBtn2Y.value = withTiming(-100, {duration: 500});
         animatedY.value = withTiming(-100, {duration: 500});
         setTimeout(() => {
           animatedBtn2Y.value = withTiming(0, {duration: 500});
@@ -43,7 +43,7 @@ const BottomTab = () => {
       animatedY.value = withTiming(0, {duration: 500});
       animatedX.value = withTiming(200, {durration: 500});
       setTimeout(() => {
-        animatedBtn3Y.value = withTiming(-200, {duration: 500});
+        animatedBtn3Y.value = withTiming(-100, {duration: 500});
         animatedY.value = withTiming(-100, {duration: 500});
         setTimeout(() => {
           animatedBtn3Y.value = withTiming(0, {duration: 500});
@@ -54,7 +54,7 @@ const BottomTab = () => {
       animatedY.value = withTiming(0, {duration: 500});
       animatedX.value = withTiming(300, {durration: 500});
       setTimeout(() => {
-        animatedBtn4Y.value = withTiming(-200, {duration: 500});
+        animatedBtn4Y.value = withTiming(-100, {duration: 500});
         animatedY.value = withTiming(-100, {duration: 500});
         setTimeout(() => {
           animatedBtn4Y.value = withTiming(0, {duration: 500});
@@ -95,7 +95,7 @@ const BottomTab = () => {
   });
 
   return (
-    <View style={{flex: 1}}>
+    <View>
       <View style={styles.container}>
         <Animated.View
           style={[
@@ -115,7 +115,7 @@ const BottomTab = () => {
               width: 60,
               justifyContent: 'center',
               alignItems: 'center',
-            }.animatedBtnStyle1,
+            },animatedBtnStyle1,
           ]}
           onPress={() => {
             setSelectedTab(0);
@@ -129,7 +129,7 @@ const BottomTab = () => {
               width: 60,
               justifyContent: 'center',
               alignItems: 'center',
-            }.animatedBtnStyle2,
+            },animatedBtnStyle2,
           ]}
           onPress={() => {
             setSelectedTab(1);
@@ -143,7 +143,7 @@ const BottomTab = () => {
               width: 60,
               justifyContent: 'center',
               alignItems: 'center',
-            }.animatedBtnStyle3,
+            },animatedBtnStyle3,
           ]}
           onPress={() => {
             setSelectedTab(2);
@@ -160,7 +160,7 @@ const BottomTab = () => {
               width: 60,
               justifyContent: 'center',
               alignItems: 'center',
-            }.animatedBtnStyle4,
+            },animatedBtnStyle4,
           ]}
           onPress={() => {
             setSelectedTab(3);
