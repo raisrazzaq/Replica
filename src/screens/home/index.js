@@ -6,12 +6,8 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import React, {useState, useEffect} from 'react';
-import Animated, {
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming,
-} from 'react-native-reanimated';
+import React, {useState} from 'react';
+
 import Card from '../card';
 
 const HomePage = () => {
@@ -20,30 +16,6 @@ const HomePage = () => {
   const handleItemPress = item => {
     setSelectedItem(item);
   };
-  const [selectedTab, setSelectedTab] = useState(0);
-  const animatedX = useSharedValue(0);
-  const animatedY = useSharedValue(0);
-  useEffect(() => {
-    if (selectedTab == 0) {
-      animatedY.value = withTiming(0, {duration: 500});
-      animatedX.value = withTiming(0, {durration: 500});
-    } else if (selectedTab == 1) {
-      animatedY.value = withTiming(0, {duration: 500});
-      animatedX.value = withTiming(100, {durration: 500});
-    } else if (selectedTab == 2) {
-      animatedY.value = withTiming(0, {duration: 500});
-      animatedX.value = withTiming(200, {durration: 500});
-    } else {
-      animatedY.value = withTiming(0, {duration: 500});
-      animatedX.value = withTiming(300, {durration: 500});
-    }
-  }, [selectedTab]);
-
-  const animatedStyle = useAnimatedStyle(() => {
-    return {
-      transform: [{translateX: animatedX.value}, {translateY: animatedY.value}],
-    };
-  });
 
   return (
     <View style={{flex: 1, backgroundColor: 'whitesmoke'}}>
@@ -61,21 +33,10 @@ const HomePage = () => {
         </View>
         <Image
           style={styles.imgfilter}
-          source={require('../../assets/filter.png')}
+          source={require('../../assets/filterIC.png')}
         />
       </View>
       <View style={styles.item}>
-        <Animated.View
-          style={[
-            {
-              height: 60,
-              width: 60,
-              borderRadius: 30,
-              backgroundColor: 'orange',
-              position: 'absolute',
-            },
-            animatedStyle,
-          ]}></Animated.View>
         <TouchableOpacity
           style={[
             styles.touchableItem,
@@ -83,7 +44,6 @@ const HomePage = () => {
           ]}
           onPress={() => {
             handleItemPress('All');
-            setSelectedTab(0);
           }}>
           <Text
             style={[
@@ -99,8 +59,7 @@ const HomePage = () => {
             selectedItem === 'Chair' && {backgroundColor: 'gray'},
           ]}
           onPress={() => {
-            handleItemPress('All');
-            setSelectedTab(1);
+            handleItemPress('Chair');
           }}>
           <Text
             style={[

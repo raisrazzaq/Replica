@@ -1,203 +1,123 @@
-import {View, StyleSheet, TouchableOpacity, Image} from 'react-native';
-import React, {useState, useEffect} from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {useEffect, useState} from 'react';
+import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import Svg from 'react-native-svg';
+import Home1SVG from '../../assets/home1.svg';
+import Cart1SVG from '../../assets/cart1.svg';
+import Person1SVG from '../../assets/person1.svg';
+import FavouriteSVG from '../../assets/star.svg';
 import Animated, {
-  useAnimatedStyle,
-  useSharedValue,
   withTiming,
+  Easing,
+  useSharedValue,
+  useAnimatedStyle,
 } from 'react-native-reanimated';
-const AnimatedBtn = Animated.createAnimatedComponent(TouchableOpacity);
-const BottomTab = () => {
-  const [selectedTab, setSelectedTab] = useState(0);
-  const animatedX = useSharedValue(0);
-  const animatedY = useSharedValue(0);
 
-  const animatedBtn1Y = useSharedValue(0);
-  const animatedBtn2Y = useSharedValue(0);
-  const animatedBtn3Y = useSharedValue(0);
-  const animatedBtn4Y = useSharedValue(0);
+const MyTabBar = ({state, descriptors, navigation}) => {
+  const [icons, setIcons] = useState([]);
+
   useEffect(() => {
-    if (selectedTab == 0) {
-      animatedY.value = withTiming(0, {duration: 500});
-      animatedX.value = withTiming(0, {durration: 500});
+    const iconComponents = [Home1SVG, Cart1SVG, FavouriteSVG, Person1SVG];
+    setIcons(iconComponents);
+  }, []);
 
-      setTimeout(() => {
-        animatedBtn1Y.value = withTiming(-100, {duration: 500});
-        animatedY.value = withTiming(-100, {duration: 500});
-        setTimeout(() => {
-          animatedY.value = withTiming(0, {duration: 500});
-          animatedBtn1Y.value = withTiming(0, {duration: 500});
-        }, 200);
-      }, 1000);
-    } else if (selectedTab == 1) {
-      animatedY.value = withTiming(0, {duration: 500});
-      animatedX.value = withTiming(100, {durration: 500});
-      setTimeout(() => {
-        animatedBtn2Y.value = withTiming(-100, {duration: 500});
-        animatedY.value = withTiming(-100, {duration: 500});
-        setTimeout(() => {
-          animatedBtn2Y.value = withTiming(0, {duration: 500});
-          animatedY.value = withTiming(0, {duration: 500});
-        }, 200);
-      }, 1000);
-    } else if (selectedTab == 2) {
-      animatedY.value = withTiming(0, {duration: 500});
-      animatedX.value = withTiming(200, {durration: 500});
-      setTimeout(() => {
-        animatedBtn3Y.value = withTiming(-100, {duration: 500});
-        animatedY.value = withTiming(-100, {duration: 500});
-        setTimeout(() => {
-          animatedBtn3Y.value = withTiming(0, {duration: 500});
-          animatedY.value = withTiming(0, {duration: 500});
-        }, 200);
-      }, 1000);
-    } else {
-      animatedY.value = withTiming(0, {duration: 500});
-      animatedX.value = withTiming(300, {durration: 500});
-      setTimeout(() => {
-        animatedBtn4Y.value = withTiming(-100, {duration: 500});
-        animatedY.value = withTiming(-100, {duration: 500});
-        setTimeout(() => {
-          animatedBtn4Y.value = withTiming(0, {duration: 500});
-          animatedY.value = withTiming(0, {duration: 500});
-        }, 200);
-      }, 1000);
-    }
-  }, [selectedTab]);
-
-  const animatedStyle = useAnimatedStyle(() => {
+  const translateX = useSharedValue(0);
+  const config = {
+    duration: 300,
+    easing: Easing.bezier(0.5, 0.01, 0, 1),
+  };
+  const style = useAnimatedStyle(() => {
     return {
-      transform: [{translateX: animatedX.value}, {translateY: animatedY.value}],
+      transform: [{translateX: withTiming(translateX.value, config)}],
     };
   });
-
-  const animatedBtnStyle1 = useAnimatedStyle(() => {
-    return {
-      transform: [{translateY: animatedBtn1Y.value}],
-    };
-  });
-
-  const animatedBtnStyle2 = useAnimatedStyle(() => {
-    return {
-      transform: [{translateY: animatedBtn2Y.value}],
-    };
-  });
-
-  const animatedBtnStyle3 = useAnimatedStyle(() => {
-    return {
-      transform: [{translateY: animatedBtn3Y.value}],
-    };
-  });
-
-  const animatedBtnStyle4 = useAnimatedStyle(() => {
-    return {
-      transform: [{translateY: animatedBtn4Y.value}],
-    };
-  });
+  useEffect(() => {
+    translateX.value = state.index * 99;
+  }, [state.index]);
 
   return (
-    <View>
-      <View style={styles.container}>
-        <Animated.View
-          style={[
-            {
-              height: 60,
-              width: 60,
-              borderRadius: 30,
-              backgroundColor: 'orange',
-              position: 'absolute',
-            },
-            animatedStyle,
-          ]}></Animated.View>
-        <AnimatedBtn
-          style={[
-            {
-              height: 60,
-              width: 60,
-              justifyContent: 'center',
-              alignItems: 'center',
-            },animatedBtnStyle1,
-          ]}
-          onPress={() => {
-            setSelectedTab(0);
-          }}>
-          <Image style={styles.img} source={require('../../assets/home.png')} />
-        </AnimatedBtn>
-        <AnimatedBtn
-          style={[
-            {
-              height: 60,
-              width: 60,
-              justifyContent: 'center',
-              alignItems: 'center',
-            },animatedBtnStyle2,
-          ]}
-          onPress={() => {
-            setSelectedTab(1);
-          }}>
-          <Image style={styles.img} source={require('../../assets/cart.png')} />
-        </AnimatedBtn>
-        <AnimatedBtn
-          style={[
-            {
-              height: 60,
-              width: 60,
-              justifyContent: 'center',
-              alignItems: 'center',
-            },animatedBtnStyle3,
-          ]}
-          onPress={() => {
-            setSelectedTab(2);
-          }}>
-          <Image
-            style={styles.img}
-            source={require('../../assets/favourite.png')}
-          />
-        </AnimatedBtn>
-        <AnimatedBtn
-          style={[
-            {
-              height: 60,
-              width: 60,
-              justifyContent: 'center',
-              alignItems: 'center',
-            },animatedBtnStyle4,
-          ]}
-          onPress={() => {
-            setSelectedTab(3);
-          }}>
-          <Image
-            style={styles.img}
-            source={require('../../assets/profile.png')}
-          />
-        </AnimatedBtn>
-      </View>
+    <View style={{flexDirection: 'row'}}>
+      {state.routes.map((route, index) => {
+        const {options} = descriptors[route.key];
+        const label =
+          options.tabBarLabel !== undefined
+            ? options.tabBarLabel
+            : options.title !== undefined
+            ? options.title
+            : route.name;
+        const isFocused = state.index === index;
+
+        const onPress = () => {
+          if (!isFocused) {
+            navigation.navigate(route.name, route.params);
+          }
+        };
+
+        const onLongPress = () => {
+          navigation.emit({
+            type: 'tabLongPress',
+            target: route.key,
+          });
+        };
+
+        return (
+          <>
+            <Animated.View style={[styles.animatedView, style]} />
+            <TouchableOpacity
+              key={index}
+              accessibilityRole="button"
+              accessibilityState={isFocused ? {selected: true} : {}}
+              accessibilityLabel={options.tabBarAccessibilityLabel}
+              testID={options.tabBarTestID}
+              onPress={onPress}
+              onLongPress={onLongPress}
+              style={{
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+                paddingBottom: 12,
+                paddingTop: 2,
+              }}>
+              <View
+                style={[
+                  styles.activeIcon,
+                  {
+                    backgroundColor: isFocused ? '#C53635' : 'transparent',
+                    position: isFocused ? 'relative' : '',
+                    bottom: isFocused ? 20 : 0,
+                  },
+                ]}>
+                <Svg
+                  width={28}
+                  height={28}
+                  viewBox="0 0 28 28"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  {icons[index] &&
+                    icons[index]({
+                      width: 28,
+                      height: 28,
+                      fill: isFocused ? '#fff' : '#222',
+                    })}
+                </Svg>
+              </View>
+              <Text style={{color: isFocused ? '#000' : '#333'}}>{label}</Text>
+            </TouchableOpacity>
+          </>
+        );
+      })}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    height: 70,
-    position: 'absolute',
-    bottom: 0,
-    backgroundColor: 'pink',
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
-    flexDirection: 'row',
-  },
-
-  TouchBtn: {
-    height: 60,
-    width: 60,
+  activeIcon: {
+    width: 45,
+    height: 45,
+    borderRadius: 50,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  img: {
-    width: 30,
-    height: 30,
-  },
-
-  wrapper: {},
 });
-export default BottomTab;
+
+export default MyTabBar;

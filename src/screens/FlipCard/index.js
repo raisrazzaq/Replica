@@ -9,43 +9,38 @@ import {
   ScrollView,
 } from 'react-native';
 import {SofaDetails} from '../../utlis/constants';
+import {useRoute, useNavigation} from '@react-navigation/native';
 import {SharedElement} from 'react-navigation-shared-element';
-import {useNavigation} from '@react-navigation/native';
 
-const Card = () => {
+const CardDetails = () => {
+  const route = useRoute();
+  const {item} = route.params;
   const navigation = useNavigation();
 
   return (
     <ScrollView>
-      {SofaDetails.map((item, index) => (
-        <TouchableOpacity
-          key={index}
-          onPress={() => {
-            navigation.navigate('CardDetails', {item: item});
-          }}>
-          <View style={styles.Container}>
-            <View style={styles.cardWrapper}>
-              <SharedElement id={`item${item.id}`}>
-                <Image style={styles.cardImg} source={item.Image} />
-              </SharedElement>
-              <View style={styles.cardContaner}>
-                <Text style={styles.cardTitle}>{item.title}</Text>
-                <Text style={styles.cardDesc}>by Pocco</Text>
-                <Text style={styles.cardDesc}>
-                  comfortable cushioning, high durability and long term
-                  investment
-                </Text>
-                <View style={styles.bottomCardWrapper}>
-                  <Text style={styles.Price}>$200</Text>
-                  <TouchableOpacity style={styles.Touchable}>
-                    <Text style={styles.BuyNow}>Buy</Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
+      <View style={styles.Container}>
+        <View style={styles.cardPressed}>
+          <SharedElement id={`item${item.id}`}>
+            <Image style={styles.pressedImage} source={item.Image} />
+          </SharedElement>
+          <View style={styles.cardContaner}>
+            <Text style={styles.cardTitle}>{item.title}</Text>
+            <Text style={styles.cardDesc}>by Pocco</Text>
+            <Text style={styles.cardDesc}>
+              comfortable cushioning, high durability and long term investment
+            </Text>
+            <View style={styles.bottomCardWrapper}>
+              <Text style={styles.Price}>$200</Text>
+              <TouchableOpacity
+                style={styles.Touchable}
+                onPress={() => navigation.goBack()}>
+                <Text style={styles.BuyNow}>Go Back</Text>
+              </TouchableOpacity>
             </View>
           </View>
-        </TouchableOpacity>
-      ))}
+        </View>
+      </View>
     </ScrollView>
   );
 };
@@ -83,10 +78,11 @@ const styles = StyleSheet.create({
     borderRadius: 15,
   },
   pressedImage: {
-    marginTop: 10,
+    marginTop: 15,
     marginBottom: 10,
     width: 350,
     height: 250,
+    borderRadius: 15,
   },
   cardContaner: {
     marginLeft: 10,
@@ -114,7 +110,7 @@ const styles = StyleSheet.create({
   },
   Touchable: {
     backgroundColor: 'green',
-    width: 50,
+    width: 80,
     borderRadius: 20,
   },
   BuyNow: {
@@ -124,4 +120,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Card;
+export default CardDetails;
