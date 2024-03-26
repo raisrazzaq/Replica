@@ -1,10 +1,10 @@
 import sofa from '../assets/sofa.jpeg';
-import lamp from '../assets/lamp.jpg'; 
+import lamp from '../assets/lamp.jpg';
 import floor from '../assets/floor.jpg';
 import sofa3 from '../assets/sofa3.jpg';
-import colorcreation from '../assets/colorcreation.jpg'
+import colorcreation from '../assets/colorcreation.jpg';
 
-export const getImageSource = (title) => {
+export const getImageSource = title => {
   switch (title.toLowerCase()) {
     case 'comfey sofa':
       return sofa;
@@ -14,7 +14,7 @@ export const getImageSource = (title) => {
       return floor;
     case 'chair':
       return sofa3;
-      case 'All':
+    case 'All':
       return colorcreation;
     default:
       return require('../assets/modernroom.jpg');
@@ -22,24 +22,36 @@ export const getImageSource = (title) => {
 };
 
 export const SofaDetails = [
-    {
-       title: "Comfey Sofa",
-       by: "by pocco",
-       Description: "  comfortable cushioning,high durability and long term investment"
-    },
-    {
-        title: "lamp",
-        by: "by pocco",
-        Description: "  comfortable cushioning,high durability and long term investment"
-     },
-     {
-        title: "floor",
-        by: "by pocco",
-        Description: "  comfortable cushioning,high durability and long term investment"
-     },
-     {
-        title: "Chair",
-        by: "by pocco",
-        Description: "  comfortable cushioning,high durability and long term investment"
-     },
+  {
+    id: 1,
+    Image: require('../assets/sofa.jpeg'),
+    title: 'Comfey Sofa',
+    by: 'by pocco',
+    Description:
+      '  comfortable cushioning,high durability and long term investment',
+  },
+  {
+    id: 2,
+    Image: require('../assets/lamp.jpg'),
+    title: 'lamp',
+    by: 'by pocco',
+    Description:
+      '  comfortable cushioning,high durability and long term investment',
+  },
+  {
+    id: 3,
+    Image: require('../assets/floor.jpg'),
+    title: 'floor',
+    by: 'by pocco',
+    Description:
+      '  comfortable cushioning,high durability and long term investment',
+  },
+  {
+    id: 4,
+    Image: require('../assets/sofa3.jpg'),
+    title: 'Chair',
+    by: 'by pocco',
+    Description:
+      '  comfortable cushioning,high durability and long term investment',
+  },
 ];
