@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
   },
   touchableItem: {
     padding: 5,
-    borderRadius: 10,
+    borderRadius: 12,
   },
   textitem: {
     fontSize: 16,
