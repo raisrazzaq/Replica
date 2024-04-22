@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   View,
   Text,
@@ -5,26 +6,33 @@ import {
   Dimensions,
   Image,
   TouchableOpacity,
-  ScrollView
+  ScrollView,
 } from 'react-native';
-import React from 'react';
 import {SofaDetails} from '../../utlis/constants';
+import {SharedElement} from 'react-navigation-shared-element';
+import {useNavigation} from '@react-navigation/native';
+
 const Card = () => {
+  const navigation = useNavigation();
+
   return (
-      <View>
-         <ScrollView>
-        {SofaDetails.map((item, index) => (
-          <View style={styles.Container} key={index}>
+    <ScrollView>
+      {SofaDetails.map((item, index) => (
+        <TouchableOpacity
+          key={index}
+          onPress={() => {
+            navigation.navigate('CardDetails', {item: item});
+          }}>
+          <View style={styles.Container}>
             <View style={styles.cardWrapper}>
-              <Image
-                style={styles.cardImg}
-                source={require('../../assets/sofa.jpeg')}
-              />
+              <SharedElement id={`item${item.id}`}>
+                <Image style={styles.cardImg} source={item.Image} />
+              </SharedElement>
               <View style={styles.cardContaner}>
                 <Text style={styles.cardTitle}>{item.title}</Text>
                 <Text style={styles.cardDesc}>by Pocco</Text>
                 <Text style={styles.cardDesc}>
-                  comfortable cushioning,high durability and long term
+                  comfortable cushioning, high durability and long term
                   investment
                 </Text>
                 <View style={styles.bottomCardWrapper}>
@@ -36,9 +44,9 @@ const Card = () => {
               </View>
             </View>
           </View>
-        ))}
-        </ScrollView>
-      </View>
+        </TouchableOpacity>
+      ))}
+    </ScrollView>
   );
 };
 
@@ -51,7 +59,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 15,
     alignItems: 'center',
-    // position: 'absolute',
     zIndex: 1,
     marginTop: 20,
     left: (Width - Width * 0.9) / 2,
@@ -61,13 +68,25 @@ const styles = StyleSheet.create({
   cardWrapper: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    // padding:3,
     marginLeft: 8,
+  },
+  cardPressed: {
+    height: Height,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column',
   },
   cardImg: {
     width: 120,
     height: 130,
     borderRadius: 15,
+  },
+  pressedImage: {
+    marginTop: 10,
+    marginBottom: 10,
+    width: 350,
+    height: 250,
   },
   cardContaner: {
     marginLeft: 10,

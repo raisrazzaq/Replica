@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React, {useState} from 'react';
+
 import Card from '../card';
 
 const HomePage = () => {
@@ -32,7 +33,7 @@ const HomePage = () => {
         </View>
         <Image
           style={styles.imgfilter}
-          source={require('../../assets/filter.png')}
+          source={require('../../assets/filterIC.png')}
         />
       </View>
       <View style={styles.item}>
@@ -41,7 +42,9 @@ const HomePage = () => {
             styles.touchableItem,
             selectedItem === 'All' && {backgroundColor: 'gray'},
           ]}
-          onPress={() => handleItemPress('All')}>
+          onPress={() => {
+            handleItemPress('All');
+          }}>
           <Text
             style={[
               styles.textitem,
@@ -55,7 +58,9 @@ const HomePage = () => {
             styles.touchableItem,
             selectedItem === 'Chair' && {backgroundColor: 'gray'},
           ]}
-          onPress={() => handleItemPress('Chair')}>
+          onPress={() => {
+            handleItemPress('Chair');
+          }}>
           <Text
             style={[
               styles.textitem,
@@ -108,9 +113,7 @@ const HomePage = () => {
         </TouchableOpacity>
       </View>
 
-      
-        <Card />
-      
+      <Card />
     </View>
   );
 };
@@ -171,7 +174,7 @@ const styles = StyleSheet.create({
   },
   touchableItem: {
     padding: 5,
-    borderRadius: 10,
+    borderRadius: 12,
   },
   textitem: {
     fontSize: 16,
