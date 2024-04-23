@@ -55,3 +55,16 @@ export const SofaDetails = [
       '  comfortable cushioning,high durability and long term investment',
   },
 ];
+const genderList = [
+  {name: 'Male'},
+  {name: 'Female'},
+  {name: 'Pefer not to Identify'},
+];
+const relativesList = [
+  {name: 'Parent'},
+  {name: 'Sibling'},
+  {name: 'Legal Gaudian'},
+  {name: 'Friend'},
+  {name: 'Spouse'},
+  {name: 'Child'},
+];
