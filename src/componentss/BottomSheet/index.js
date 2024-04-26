@@ -7,6 +7,7 @@ import {
   Text,
   Image,
   TouchableOpacity,
+  Pressable,
 } from 'react-native';
 
 const BottomSheet = ({visible, onClose, children, title, DoneText}) => {
@@ -17,7 +18,7 @@ const BottomSheet = ({visible, onClose, children, title, DoneText}) => {
         transparent={true}
         visible={visible}
         onRequestClose={onClose}>
-        <TouchableOpacity style={styles.BackgroundVision} onPress={onClose}>
+        <Pressable style={styles.BackgroundVision} onPress={onClose}>
           <View style={styles.modal}>
             <View style={styles.bottomModelView}>
               <Text style={styles.title}>{title}</Text>
@@ -33,7 +34,7 @@ const BottomSheet = ({visible, onClose, children, title, DoneText}) => {
               <Text style={styles.btnText}>{DoneText}</Text>
             </TouchableOpacity>
           </View>
-        </TouchableOpacity>
+        </Pressable>
       </Modal>
     </SafeAreaView>
   );
@@ -41,7 +42,7 @@ const BottomSheet = ({visible, onClose, children, title, DoneText}) => {
 
 const styles = StyleSheet.create({
   modal: {
-    backgroundColor: 'white',
+    backgroundColor: 'red',
     height: 400,
     bottom: 0,
     marginTop: 450,

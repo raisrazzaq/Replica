@@ -243,7 +243,6 @@ import {RNSVGForeignObject} from 'react-native-svg';
 //   View,
 //   TouchableOpacity,
 // } from 'react-native';
-// import WebView from './src/screens/webView/WebView';
 
 // const App = () => {
 //   const [visible, setVisible] = useState(false);
@@ -331,10 +330,8 @@ import {RNSVGForeignObject} from 'react-native-svg';
 
 // export default App;
 
-import {View, Text} from 'react-native';
 import React from 'react';
-import DemoWebView from './src/screens/webView/DemoWebView';
-
+import DemoWebView from './src/screens/webView';
 const App = () => {
   return <DemoWebView />;
 };
